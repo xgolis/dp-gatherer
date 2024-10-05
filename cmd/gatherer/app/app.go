@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/xgolis/dp-gatherer/cmd/gatherer/pkg/version"
+	"github.com/xgolis/dp-gatherer/pkg/version"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
