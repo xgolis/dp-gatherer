@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/xgolis/dp-gatherer/git"
 	"github.com/xgolis/dp-gatherer/pkg/version"
 
 	"github.com/rs/zerolog"
@@ -58,6 +59,7 @@ func New() *cobra.Command {
 	pflags := app.PersistentFlags()
 	pflags.CountVarP(verbosity, "verbose", "v", "Increase verbosity level")
 	app.AddCommand(NewVersionCommand())
+	app.AddCommand(NewGitPullCommand())
 
 	return app
 }
@@ -67,15 +69,26 @@ func NewVersionCommand() *cobra.Command {
 		Use:   "version",
 		Short: "Print application version information",
 		Args:  cobra.NoArgs,
-		// RunE: func(cmd *cobra.Command, args []string) error {
-		//  // return fmt.Print(version.Get())
-		//  return fmt.Errorf("%w", ErrorVersion)
-		// },
 		Run: func(cmd *cobra.Command, args []string) {
-			log.Logger.Info().Msg("info")
-			log.Logger.Trace().Msg("hehe")
 			fmt.Print(version.Get())
-			// return fmt.Errorf("%w", ErrorVersion)
 		},
 	}
+}
+
+func NewGitPullCommand() *cobra.Command {
+	var gitArgs = &git.GitArgs{}
+	cmd := &cobra.Command{
+		Use:   "pull",
+		Short: "Pulls terraform modules from Git repository",
+		Args:  cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			fmt.Println(gitArgs)
+			return nil
+		},
+	}
+
+	gitArgs = git.GetGitPullArgs(cmd.Flags())
+
+	return cmd
 }

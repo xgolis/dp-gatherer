@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/xgolis/dp-gatherer/cmd/gatherer/app"
-	"github.com/xgolis/dp-gatherer/cmd/gatherer/pkg/errhelp"
-	"github.com/xgolis/dp-gatherer/cmd/gatherer/pkg/utils"
+	"github.com/xgolis/dp-gatherer/pkg/errhelp"
+	"github.com/xgolis/dp-gatherer/pkg/utils"
 )
 
 func main() {
